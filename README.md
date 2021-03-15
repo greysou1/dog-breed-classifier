@@ -19,7 +19,7 @@ The model currently has a train accuracy of 98%
 
 ## Dataset
 
-The dataset can be found [here](%E2%80%8Bhttps://www.kaggle.com/c/dog-breed-identification/data).
+The dataset can be found [here](https://www.kaggle.com/c/dog-breed-identification/data).
 
 ## API
 
