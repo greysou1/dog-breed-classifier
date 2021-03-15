@@ -23,4 +23,8 @@ The dataset can be found [here](https://www.kaggle.com/c/dog-breed-identificatio
 
 ## API
 
-Still in works. 
+To use API 
+
+ 1. Run `python api.py`
+ 2. Then send a post request to local host 
+ `curl -X POST -F image=@image-directory 'http://localhost:5000/predict`
