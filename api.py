@@ -14,6 +14,7 @@ app = flask.Flask(__name__)
 model = None
 image_resize = 224
 
+@app.before_first_request
 def load_model():
     # load the pre-trained Keras model (here we are using a model
     # pre-trained on ImageNet and provided by Keras, but you can
