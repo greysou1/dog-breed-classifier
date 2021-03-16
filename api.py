@@ -1,11 +1,3 @@
-# USAGE
-# Start the server:
-# 	python run_keras_server.py
-# Submit a request via cURL:
-# 	curl -X POST -F image=@dog.jpg 'http://localhost:5000/predict'
-# Submita a request via Python:
-#	python simple_request.py
-
 # import the necessary packages
 import keras
 from keras.applications import ResNet50
@@ -43,7 +35,7 @@ def prepare_image(image, target=image_resize):
     # return the processed image
     return image
 
-@app.route("/predict", methods=["POST"])
+@app.route("/", methods=["POST"])
 def predict():
     # initialize the data dictionary that will be returned from the
     # view
@@ -83,4 +75,4 @@ if __name__ == "__main__":
     print(("* Loading Keras model and Flask starting server..."
         "please wait until server has fully started"))
     load_model()
-    app.run()
+    app.run(host="0.0.0.0", port=8000)
