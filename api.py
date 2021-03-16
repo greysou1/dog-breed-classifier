@@ -50,10 +50,10 @@ def predict():
     if flask.request.method == "POST":
         input = request.json
         # decode base64 image
-        image = base64.b64decode(input)
+        image = input['image']
+        image = base64.b64decode(image)
         # if flask.request.files.get("image"):
         # read the image in PIL format
-        image = input['image']
         # image = flask.request.files["image"].read()
         image = Image.open(io.BytesIO(image))
 
