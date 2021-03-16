@@ -23,8 +23,12 @@ The dataset can be found [here](https://www.kaggle.com/c/dog-breed-identificatio
 
 ## API
 
-To use API 
+### To use API locally
 
  1. Run `python api.py`
  2. Then send a post request to local host 
- `curl -X POST -F image=@image-directory 'http://localhost:5000/predict`
+ `curl -X POST -F image=@image-directory 'http://localhost:8000/`
+
+### To use public API
+Send a post request to 143.110.177.46:8000
+`curl -X POST -F image=@image-directory http://143.110.177.46:8000`
