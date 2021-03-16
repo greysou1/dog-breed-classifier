@@ -1,4 +1,5 @@
 # import the necessary packages
+from flask.globals import request
 import keras
 from keras.applications import ResNet50
 from keras.preprocessing.image import img_to_array
@@ -8,6 +9,7 @@ from PIL import Image
 import numpy as np
 import flask
 import io
+import base64
 
 # initialize our Flask application and the Keras model
 app = flask.Flask(__name__)
@@ -46,28 +48,32 @@ def predict():
 
     # ensure an image was properly uploaded to our endpoint
     if flask.request.method == "POST":
-        if flask.request.files.get("image"):
-            # read the image in PIL format
-            image = flask.request.files["image"].read()
-            image = Image.open(io.BytesIO(image))
+        input = request.json
+        # decode base64 image
+        image = base64.b64decode(input)
+        # if flask.request.files.get("image"):
+        # read the image in PIL format
+        image = input['image']
+        # image = flask.request.files["image"].read()
+        image = Image.open(io.BytesIO(image))
 
-            # preprocess the image and prepare it for classification
-            image = prepare_image(image, target=(224, 224))
-            
-            # Labels list to classify the images into
-            labels = ['beagle', 'chihuahua', 'doberman', 'french_bulldog', 'golden_retriever', 'malamute', 'pug', 'saint_bernard', 'scottish_deerhound', 'tibetan_mastiff']
-            
-            # classify the input image and then initialize the list
-            # of predictions to return to the client
-            preds = model.predict(image) 
-            prob = np.max(preds)
-            label = labels[np.argmax(preds)]
+        # preprocess the image and prepare it for classification
+        image = prepare_image(image, target=(224, 224))
+        
+        # Labels list to classify the images into
+        labels = ['beagle', 'chihuahua', 'doberman', 'french_bulldog', 'golden_retriever', 'malamute', 'pug', 'saint_bernard', 'scottish_deerhound', 'tibetan_mastiff']
+        
+        # classify the input image and then initialize the list
+        # of predictions to return to the client
+        preds = model.predict(image) 
+        prob = np.max(preds)
+        label = labels[np.argmax(preds)]
 
-            # add label and it's probablity to return dic
-            output = {"breed": str(label), "score": str(prob)}
+        # add label and it's probablity to return dic
+        output = {"breed": str(label), "score": str(prob)}
 
-            # indicate that the request was a success
-            # data["success"] = True
+        # indicate that the request was a success
+        # data["success"] = True
 
     # return the data dictionary as a JSON response
     return flask.jsonify(output)
