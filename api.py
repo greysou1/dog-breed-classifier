@@ -19,7 +19,9 @@ def load_model():
     # pre-trained on ImageNet and provided by Keras, but you can
     # substitute in your own networks just as easily)	
     global model
+    print('Importing Model')
     model = keras.models.load_model('dog_breed_classifier_resnet_model.h5')
+    if model != None: print('Model successfully imported')
 
 def prepare_image(image, target=image_resize):
     # if the image mode is not RGB, convert it
