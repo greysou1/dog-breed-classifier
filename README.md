@@ -31,4 +31,4 @@ The dataset can be found [here](https://www.kaggle.com/c/dog-breed-identificatio
 
 ### To use public API
 Send a post request to 143.110.177.46:8000
-`curl -X POST -F image=@image-directory http://143.110.177.46:8000`
+`curl -X POST -F image=@image-directory dbc.my.to:8000`
