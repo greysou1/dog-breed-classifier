@@ -1,2 +1,3 @@
-bind = "0.0.0.0:8080"
-workers = 2
+def post_worker_init(worker):
+    import load_model from api
+    load_model()
