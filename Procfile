@@ -1,1 +1,1 @@
-web: gunicorn --bind 0.0.0.0:$PORT app:api.py
+web: gunicorn --worker-tmp-dir /dev/shm --config gunicorn_config.py app:api
