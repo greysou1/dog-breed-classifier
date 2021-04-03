@@ -23,7 +23,7 @@ def load_model():
     # substitute in your own networks just as easily)	
     global model
     print('Importing Model')
-    model = keras.models.load_model('dog_breed_classifier_resnet_model.h5')
+    model = keras.models.load_model('dog_breed_classifier_resnet_model120.h5')
     if model != None: print('Model successfully imported')
 
 def prepare_image(image, target=image_resize):
