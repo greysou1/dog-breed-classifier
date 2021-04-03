@@ -48,7 +48,7 @@ def home():
 @app.route("/upload", methods=["POST"])
 def upload():
     output = predict()
-    print(output)
+    output = output.json()
     breed = output['breed']
     score = output['score']
 
