@@ -1,6 +1,7 @@
 # import the necessary packages
 from flask.globals import request
 import keras
+import pandas as pd
 from keras.applications import ResNet50
 from keras.preprocessing.image import img_to_array
 from keras.applications import imagenet_utils
@@ -65,8 +66,9 @@ def predict():
         image = prepare_image(image, target=(224, 224))
         
         # Labels list to classify the images into
-        labels = [d for _,d,_ in (os.walk("/content/train"))]
-        labels = sorted(labels[0])
+        df = pd.read_csv (r'labels.csv')
+        breeds = df['breed']
+        labels = sorted(breeds.unique())
         
         # classify the input image and then initialize the list
         # of predictions to return to the client
