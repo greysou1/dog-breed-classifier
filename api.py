@@ -9,11 +9,11 @@ from keras.models import load_model
 from PIL import Image
 import numpy as np
 import flask
-import io, os
-import base64
+from flask import Flask, flash, redirect, render_template, request, session
+import io
 
 # initialize our Flask application and the Keras model
-app = flask.Flask(__name__)
+app = Flask(__name__)
 model = None
 image_resize = 224
 
@@ -41,21 +41,24 @@ def prepare_image(image, target=image_resize):
     # return the processed image
     return image
 
-@app.route("/", methods=["POST"])
-def predict():
-    # initialize the data dictionary that will be returned from the
-    # view
-    # data = {"success": False}
+@app.route("/", methods=["GET"])
+def home():
+    return render_template('home.html')
 
+@app.route("/upload", methods=["POST"])
+def upload():
+    output = predict().json()
+    breed = output['breed']
+    score = output['score']
+
+    return render_template('prediction.html', breed=breed, score=score)
+
+
+
+@app.route("/api", methods=["POST"])
+def predict():
     # ensure an image was properly uploaded to our endpoint
     if flask.request.method == "POST":
-        # file = request.files['image']
-        # # Read the image via file.stream
-        # image = Image.open(file.stream)
-        # # input = request.json
-        # # decode base64 image
-        # image = input['image']
-        # image = base64.b64decode(image)
 
         if flask.request.files.get("image"):
             #read the image in PIL format
