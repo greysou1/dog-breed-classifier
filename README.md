@@ -23,7 +23,8 @@ The dataset can be found [here](https://www.kaggle.com/c/dog-breed-identificatio
 
 ## API
 
-Send a post request to 143.110.177.46:8000 (domain: dbc.my.to, port: 8000)
+Send a post request to 143.110.177.46:8000 (domain: dbc.my.to, port: 8000).
+
 `curl -r POST -d '{"image":<base64 encoded image>}' http://dbc.my.to:8000`
 
 or look at [test.py](test.py) for python example.
