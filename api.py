@@ -8,7 +8,7 @@ from keras.models import load_model
 from PIL import Image
 import numpy as np
 import flask
-import io
+import io, os
 import base64
 
 # initialize our Flask application and the Keras model
@@ -48,20 +48,25 @@ def predict():
 
     # ensure an image was properly uploaded to our endpoint
     if flask.request.method == "POST":
-        input = request.json
-        # decode base64 image
-        image = input['image']
-        image = base64.b64decode(image)
-        # if flask.request.files.get("image"):
-        # read the image in PIL format
-        # image = flask.request.files["image"].read()
-        image = Image.open(io.BytesIO(image))
+        # file = request.files['image']
+        # # Read the image via file.stream
+        # image = Image.open(file.stream)
+        # # input = request.json
+        # # decode base64 image
+        # image = input['image']
+        # image = base64.b64decode(image)
+
+        if flask.request.files.get("image"):
+            #read the image in PIL format
+            image = flask.request.files["image"].read()
+            image = Image.open(io.BytesIO(image))
 
         # preprocess the image and prepare it for classification
         image = prepare_image(image, target=(224, 224))
         
         # Labels list to classify the images into
-        labels = ['beagle', 'chihuahua', 'doberman', 'french_bulldog', 'golden_retriever', 'malamute', 'pug', 'saint_bernard', 'scottish_deerhound', 'tibetan_mastiff']
+        labels = [d for _,d,_ in (os.walk("/content/train"))]
+        labels = sorted(labels[0])
         
         # classify the input image and then initialize the list
         # of predictions to return to the client
