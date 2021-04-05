@@ -64,6 +64,8 @@ def predict():
             #read the image in PIL format
             image = flask.request.files["image"].read()
             image = Image.open(io.BytesIO(image))
+        else:
+            return make_response(message='File not uploaded!', 400)
 
         # preprocess the image and prepare it for classification
         image = prepare_image(image, target=(224, 224))
