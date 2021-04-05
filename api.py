@@ -10,7 +10,7 @@ from PIL import Image
 import numpy as np
 import flask
 from flask import Flask, flash, redirect, render_template, request, session, make_response
-import io
+import io, json
 
 # initialize our Flask application and the Keras model
 app = Flask(__name__)
@@ -93,9 +93,12 @@ def predict():
         # indicate that the request was a success
         # data["success"] = True
 
-
+    response = app.response_class(response=json.dumps(output),
+                                    status = 200,
+                                    mimetype = 'application/json')
     # return the data dictionary as a JSON response
-    return flask.jsonify(output)
+    return response
+    # return flask.jsonify(output)
     # return make_response(output), 200
 
     # if this is the main thread of execution first load the model and
