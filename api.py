@@ -95,8 +95,8 @@ def predict():
 
 
     # return the data dictionary as a JSON response
-    # return flask.jsonify(output)
-    return make_response(output), 200
+    return flask.jsonify(output)
+    # return make_response(output), 200
 
     # if this is the main thread of execution first load the model and
 # then start the server
