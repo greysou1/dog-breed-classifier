@@ -88,7 +88,7 @@ def predict():
         output = {"breed": str(label), "score": str(prob)}
         print(output)
 
-        message = flask.jsonify(message=output)
+        # message = flask.jsonify(message=output)
         
         # indicate that the request was a success
         # data["success"] = True
@@ -96,7 +96,7 @@ def predict():
 
     # return the data dictionary as a JSON response
     # return flask.jsonify(output)
-    return make_response(message, 200)
+    return make_response(output), 200
 
     # if this is the main thread of execution first load the model and
 # then start the server
