@@ -65,6 +65,7 @@ def predict():
             image = flask.request.files["image"].read()
             image = Image.open(io.BytesIO(image))
         elif flask.request.form:
+            print('Form data')
             return make_response('Form data'),400
         else:
             return make_response('File not uploaded!'), 400
