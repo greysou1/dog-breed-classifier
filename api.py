@@ -10,10 +10,13 @@ from PIL import Image
 import numpy as np
 import flask
 from flask import Flask, flash, redirect, render_template, request, session, make_response
+from flask_cors import CORS, cross-origin
 import io, json
 
 # initialize our Flask application and the Keras model
 app = Flask(__name__)
+CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 model = None
 image_resize = 224
 
@@ -56,6 +59,7 @@ def upload():
 
 
 @app.route("/api", methods=["POST"])
+@cross_origin()
 def predict():
     # ensure an image was properly uploaded to our endpoint
     if flask.request.method == "POST":
