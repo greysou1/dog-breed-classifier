@@ -10,7 +10,7 @@ from PIL import Image
 import numpy as np
 import flask
 from flask import Flask, flash, redirect, render_template, request, session, make_response
-from flask_cors import CORS, cross-origin
+from flask_cors import CORS, cross_origin
 import io, json
 
 # initialize our Flask application and the Keras model
