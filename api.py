@@ -22,16 +22,19 @@ image_resize = 224
 
 @app.before_first_request
 def load_model():
-    # load the pre-trained Keras model (here we are using a model
-    # pre-trained on ImageNet and provided by Keras, but you can
-    # substitute in your own networks just as easily)	
+    ''' 
+    load the pre-trained model
+    '''
     global model
     print('Importing Model')
     model = keras.models.load_model('dog_breed_classifier_resnet_model120.h5')
     if model != None: print('Model successfully imported')
 
 def prepare_image(image, target=image_resize):
-    # if the image mode is not RGB, convert it
+    '''
+    prepare the input image to suit the input of the classifier model (RESNET-50)
+    '''
+    #if the image mode is not RGB, convert it
     if image.mode != "RGB":
         image = image.convert("RGB")
 
@@ -44,6 +47,7 @@ def prepare_image(image, target=image_resize):
     # return the processed image
     return image
 
+'''
 @app.route("/", methods=["GET"])
 def home():
     return render_template('home.html')
@@ -56,34 +60,34 @@ def upload():
     score = output['score']
 
     return render_template('prediction.html', breed=breed, score=score)
-
+'''
 
 @app.route("/api", methods=["POST"])
 @cross_origin()
 def predict():
+    '''
+    takes the input image from the POST request, pre-processes it and passes it to the trained model,
+    the output of the model is then returned as a JSON object
+    '''
     # ensure an image was properly uploaded to our endpoint
     if flask.request.method == "POST":
-
+        # ensure the user has attached an image file with the POST request
         if flask.request.files.get("image"):
             #read the image in PIL format
             image = flask.request.files["image"].read()
             image = Image.open(io.BytesIO(image))
-        elif flask.request.form:
-            print('Form data')
-            return make_response('Form data'),400
         else:
             return make_response('File not uploaded!'), 400
 
         # preprocess the image and prepare it for classification
         image = prepare_image(image, target=(224, 224))
         
-        # Labels list to classify the images into
+        # labels list to classify the images into
         df = pd.read_csv (r'labels.csv')
         breeds = df['breed']
         labels = sorted(breeds.unique())
         
-        # classify the input image and then initialize the list
-        # of predictions to return to the client
+        # classify the input image and find it's label
         preds = model.predict(image) 
         prob = np.max(preds)
         label = labels[np.argmax(preds)]
@@ -92,22 +96,8 @@ def predict():
         output = {"breed": str(label), "score": str(prob)}
         print(output)
 
-        # message = flask.jsonify(message=output)
-        
-        # indicate that the request was a success
-        # data["success"] = True
-
-    response = app.response_class(response=json.dumps(output),
-                                    status = 200,
-                                    mimetype = 'application/json')
     # return the data dictionary as a JSON response
-    return response
-    # return flask.jsonify(output)
-    # return make_response(output), 200
-
-    # if this is the main thread of execution first load the model and
-# then start the server
-
+    return flask.jsonify(output)
 
 if __name__ == "__main__":
     load_model()
