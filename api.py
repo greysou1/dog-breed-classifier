@@ -9,7 +9,7 @@ from keras.models import load_model
 from PIL import Image
 import numpy as np
 import flask
-from flask import Flask, flash, redirect, render_template, request, session
+from flask import Flask, flash, redirect, render_template, request, session, make_response
 import io
 
 # initialize our Flask application and the Keras model
@@ -82,12 +82,16 @@ def predict():
         # add label and it's probablity to return dic
         output = {"breed": str(label), "score": str(prob)}
         print(output)
+
+        message = flask.jsonify(message=output)
+        
         # indicate that the request was a success
         # data["success"] = True
 
 
     # return the data dictionary as a JSON response
-    return flask.jsonify(output)
+    # return flask.jsonify(output)
+    return make_response(message, 200)
 
     # if this is the main thread of execution first load the model and
 # then start the server
