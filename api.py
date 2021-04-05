@@ -81,9 +81,10 @@ def predict():
 
         # add label and it's probablity to return dic
         output = {"breed": str(label), "score": str(prob)}
-
+        print(output)
         # indicate that the request was a success
         # data["success"] = True
+
 
     # return the data dictionary as a JSON response
     return flask.jsonify(output)
