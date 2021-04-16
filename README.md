@@ -21,7 +21,7 @@ API hosted at
 
 Website can be found at [classifythatdog.netlify.app](https://classifythatdog.netlify.app)
 
-Developed my @bhanuprakashj [dog-breed-classifier-UI](https://github.com/bhanuprakashj/dog-breed-classifier-UI)
+Developed by [@bhanuprakashj](https://github.com/bhanuprakashj) <br>Repo:[dog-breed-classifier-UI](https://github.com/bhanuprakashj/dog-breed-classifier-UI)
 
 
 
