@@ -11,14 +11,10 @@ import numpy as np
 import flask
 from flask import Flask, flash, redirect, render_template, request, session, make_response
 from flask_cors import CORS, cross_origin
-from OpenSSL import SSL
 import io, json
 
 # initialize our Flask application and the Keras model
 app = Flask(__name__)
-context = SSL.Context(SSL.PROTOCOL_TLSv1_2)
-context.use_privatekey_file('/etc/letsencrypt/live/dbc.my.to/privkey.pem')
-context.use_certificate_file('/etc/letsencrypt/live/dbc.my.to/fullchain.pem')
 CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 model = None
@@ -105,4 +101,5 @@ def predict():
 
 if __name__ == "__main__":
     load_model()
+    context = ('/etc/letsencrypt/live/dbc.my.to/fullchain.pem', '/etc/letsencrypt/live/dbc.my.to/privkey.pem')#certificate and key files
     app.run(host="0.0.0.0", port=8000, debug=False, ssl_context=context)
