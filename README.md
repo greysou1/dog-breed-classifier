@@ -15,7 +15,7 @@ Send a post request to 143.110.177.46:8000 (domain: dbc.my.to, port: 8000). <br>
 or look at [test.py](test.py) for python example.
 
 API hosted at
-<a href="https://www.digitalocean.com" target="_blank"> <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/DigitalOcean_logo.svg/1024px-DigitalOcean_logo.svg.png" alt="DigitalOcean" width="40" height="40"/> </a> </p>
+<a href="https://www.digitalocean.com" target="_blank"> <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/DigitalOcean_logo.svg/1024px-DigitalOcean_logo.svg.png" alt="DigitalOcean" width="40" height="40"/> </a>
 
 ## Website
 
@@ -23,5 +23,6 @@ Website can be found at [classifythatdog.netlify.app](https://classifythatdog.ne
 
 Developed by [@bhanuprakashj](https://github.com/bhanuprakashj) <br>Repo:[dog-breed-classifier-UI](https://github.com/bhanuprakashj/dog-breed-classifier-UI)
 
+## API Server Accesslog Stats
 
-
+[Server Accesslog Stats](https://github.com/greysou1/server_accesslogs_stats)<a href="https://www.github.com" target="_blank"> <img src="https://icon-library.com/images/github-icon-png/github-icon-png-29.jpg" alt="GitHub" width="20" height="20"/> </a>
